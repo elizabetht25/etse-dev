@@ -26,10 +26,16 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="">
-        <div className=" top-0 right-0 flex flex-col absolute py-10 px-5 z-10">
-          <Link href="/">About</Link>
-          <Link href="/">Experience</Link>
-          <Link href="/">Contact</Link>
+        <div className=" top-0 right-0 fixed absolute flex flex-col py-10 px-5 z-10">
+          <Link className="text-xl" href="/">
+            About
+          </Link>
+          <Link className="text-xl" href="/">
+            Experience
+          </Link>
+          <Link className="text-xl" href="/">
+            Contact
+          </Link>
         </div>
         {children}
       </body>
