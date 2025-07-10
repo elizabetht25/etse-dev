@@ -6,7 +6,8 @@ import SmoothScroll from "@/lib/SmoothScroll";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-gsap.registerPlugin(ScrollTrigger);
+import { SplitText } from "gsap/all";
+gsap.registerPlugin(ScrollTrigger, SplitText);
 
 export default function Home() {
   useEffect(() => {
@@ -36,7 +37,6 @@ function HeroSection() {
 
   let xPercent = 0;
   let direction = -1;
-  
 
   useEffect(() => {
     requestAnimationFrame(animation);
@@ -49,7 +49,7 @@ function HeroSection() {
         scrub: true,
         onUpdate: (e) => (direction = e.direction * -1),
       },
-      x: "-=300px",
+      x: "-=200px",
     });
     // requestAnimationFrame(animation2);
 
@@ -74,7 +74,7 @@ function HeroSection() {
     }
     gsap.set(fText1.current, { xPercent: xPercent });
     gsap.set(sText1.current, { xPercent: xPercent });
-    
+
     xPercent += 0.1 * direction;
 
     // gsap.set(fText2.current, { xPercent: xPercent });
@@ -142,7 +142,6 @@ function HeroSection() {
       scrollTrigger: {
         trigger: containerRef.current,
         start: "50% 50%",
-        markers: true,
         scrub: true,
       },
       immediateRender: false,
@@ -264,9 +263,85 @@ function HeroSection() {
 }
 
 function AboutMe() {
+  useGSAP(() => {
+    const headerSplit = SplitText.create(".aboutHeader", {
+      type: "chars",
+    });
+    //option:1
+    const paraSplit = SplitText.create(".para", {
+      type: "words, lines",
+
+      mask: "lines",
+      linesClass: "paragraph-line",
+    });
+
+    gsap.from(headerSplit.chars, {
+      yPercent: 300,
+      ease: "power1.inOut",
+      duration: 1,
+      stagger: 0.05,
+      scrollTrigger: {
+        trigger: ".aboutHeader",
+        start: "top 90%",
+        markers: true,
+      },
+    });
+    //option 1 fade up paragraph
+    gsap.from(paraSplit.words, {
+      yPercent: 200,
+      ease: "power1.in",
+      duration: 1,
+      stagger: 0.01,
+      scrollTrigger: {
+        trigger: ".para",
+        start: "top 60%",
+        markers: true,
+      },
+    });
+    //option 2 reveal paragraph
+    // document.querySelectorAll(".para").forEach((e) => {
+    //   const paraSplit = SplitText.create(e, {
+    //     type: "words",
+    //   });
+    //   gsap.fromTo(
+    //     paraSplit.words,
+    //     { opacity: 0.5 },
+    //     {
+    //       opacity: 1,
+    //       // ease: 'power1.in',
+    //       // duration: 0.3,
+    //       stagger: 0.05,
+    //       scrollTrigger: {
+    //         trigger: e,
+    //         start: " top center",
+    //         end: "bottom center",
+    //         scrub: true,
+    //         invalidateOnRefresh: true,
+    //         markers: true,
+    //       },
+    //     }
+    //   );
+    // });
+  });
   return (
-    <div className="h-screen flex border">
-      <div className="flex flex-col border"><div className="border text-4xl font-bold p-50 w-screen-1/2 h-[200]"> <div> About me </div><div className="border text-3xl h-[600] w-[600] p-15"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</div></div></div> 
+    <div className="h-screen flex border ">
+      <div className="flex flex-col border">
+        <div className="border p-50 w-screen-1/2 h-[200]">
+          {" "}
+          <div className="aboutHeader flex justify-center overflow-hidden text-6xl font-bold">
+            <p>About me</p>
+          </div>
+          <div className="border para items-center text-7xl h-[600] p-15 pt-20 overflow-hidden">
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+              enim ad minim veniam, quis nostrud exercitation ullamco laboris
+              nisi ut aliquip ex.
+            </p>
+          </div>
+        </div>
       </div>
+    </div>
   );
 }
+function ExperienceSlider() {}
