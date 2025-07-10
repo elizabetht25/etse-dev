@@ -17,7 +17,7 @@ export default function Home() {
     <div id="smooth-wrapper">
       <div id="smooth-content">
         <HeroSection />
-      <AboutMe />
+        <AboutMe />
       </div>
     </div>
   );
@@ -27,8 +27,91 @@ function HeroSection() {
   const textRef = useRef(null);
   const containerRef = useRef(null);
   const foregroundRef = useRef(null);
-  const middlegroundRef = useRef(null);
+  const fText1 = useRef(null);
+  const sText1 = useRef(null);
+  const fText2 = useRef(null);
+  const sText2 = useRef(null);
+  const text1slider = useRef(null);
+  const text2slider = useRef(null);
 
+  let xPercent = 0;
+  let direction = -1;
+  
+
+  useEffect(() => {
+    requestAnimationFrame(animation);
+
+    gsap.to(text1slider.current, {
+      scrollTrigger: {
+        trigger: document.documentElement,
+        start: 0,
+        end: window.innerHeight,
+        scrub: true,
+        onUpdate: (e) => (direction = e.direction * -1),
+      },
+      x: "-=300px",
+    });
+    // requestAnimationFrame(animation2);
+
+    // gsap.to(text2slider.current, {
+    //   scrollTrigger: {
+    //     trigger: document.documentElement,
+    //     start: 0,
+    //     end: window.innerHeight,
+    //     scrub: true,
+    //     onUpdate: (e) => (direction = e.direction * -1),
+    //   },
+    //   x: "-=300px",
+    // });
+  }, []);
+
+  const animation = () => {
+    if (xPercent <= -100) {
+      xPercent = 0;
+    }
+    if (xPercent > 0) {
+      xPercent = -100;
+    }
+    gsap.set(fText1.current, { xPercent: xPercent });
+    gsap.set(sText1.current, { xPercent: xPercent });
+    
+    xPercent += 0.1 * direction;
+
+    // gsap.set(fText2.current, { xPercent: xPercent });
+    // gsap.set(sText2.current, { xPercent: xPercent });
+
+    // xPercent += 0.1 * direction*-1;
+    requestAnimationFrame(animation);
+  };
+
+  // useEffect(() => {
+
+  //   requestAnimationFrame(animation2);
+
+  //   gsap.to(text2slider.current, {
+  //     scrollTrigger: {
+  //       trigger: document.documentElement,
+  //       start: 0,
+  //       end: window.innerHeight,
+  //       scrub: true,
+  //       onUpdate: (e) => (direction = e.direction * -1),
+  //     },
+  //     x: "-=300px",
+  //   });
+  // }, [])
+
+  // const animation2 = () => {
+  //   if (xPercent <= -100) {
+  //     xPercent = 0;
+  //   }
+  //   if (xPercent > 0) {
+  //     xPercent = -100;
+  //   }
+  //   gsap.set(fText2.current, { xPercent: xPercent });
+  //   gsap.set(sText2.current, { xPercent: xPercent });
+  //   xPercent += 0.1 * direction*-1;
+  //   // requestAnimationFrame(animation2);
+  // };
   useGSAP(() => {
     // const introTimel = gsap.timeline({
 
@@ -45,16 +128,16 @@ function HeroSection() {
     // const introtl = gsap.timeline({
     // })
     // introtl.to(textRef.current, {
-    //   opacity:1, 
-    //   y:0, 
+    //   opacity:1,
+    //   y:0,
     //   duration:1,
     //   ease:'power1.inOut',
     //  })
     // gsap.set(textRef.current, { opacity: 1, y: 0 });
-    document.body.style.overflow = "hidden";
-    setTimeout(() => {
-  document.body.style.overflow = "auto";
-}, 1000);
+    // document.body.style.overflow = "hidden";
+    // setTimeout(() => {
+    //   document.body.style.overflow = "auto";
+    // }, 1000);
     const timel = gsap.timeline({
       scrollTrigger: {
         trigger: containerRef.current,
@@ -81,6 +164,21 @@ function HeroSection() {
       },
       "i"
     );
+
+    // const marqueeWrap = document.querySelector('.ticker-wrap-1');
+    // const spans = document.querySelectorAll('.ticktext');
+    // gsap.set(spans[0], {xPercent: -50 });
+    // gsap.set(spans[1], {xPercent: 0});
+
+    // gsap.to(spans, {
+    //   xPercent: '-=100',
+    //   duration:5,
+    //   ease:'none',
+    //   repeat:-1,
+    //   modifiers: {
+    //     xPercent: gsap.utils.wrap([-50, 50])
+    //   }
+    // });
   });
   return (
     <div
@@ -119,19 +217,56 @@ function HeroSection() {
         />
       </div>
 
-      <div ref={textRef} className="text-7xl px-30 flex flex-col absolute text-opacity-0">
+      <div
+        ref={textRef}
+        className="text-7xl px-30 flex flex-col absolute text-opacity-0"
+      >
         <h1 className="font-sans-[Oxanium]">Hi, I am </h1>
         <h1> Elizabeth Tse</h1>
+      </div>
+
+      {/* <div className="ticker-wrap-1 absolute border bottom-0 py-5 w-full overflow-hidden">
+        <div
+          ref={text2slider}
+          className="text-4xl font-extrabold flex whitespace-nowrap"
+        >
+          <span ref={fText2}>
+            {" "}
+            - Let's Dive In - Let's Dive In - Let's Dive In - Let's Dive In -
+            Let's Dive In - Let's Dive In - Let's Dive in
+          </span>
+          <span ref={sText2} className="ticktext">
+            {" "}
+            - Let's Dive In - Let's Dive In - Let's Dive In - Let's Dive In -
+            Let's Dive In - Let's Dive In - Let's Dive in
+          </span>
+        </div>
+      </div> */}
+      <div className="ticker-wrap-1 absolute bottom-0 py-15 w-full overflow-hidden">
+        <div
+          ref={text1slider}
+          className="text-5xl font-extrabold flex whitespace-nowrap"
+        >
+          <span ref={fText1}>
+            {" "}
+            - Let's Dive In - Let's Dive In - Let's Dive In - Let's Dive In -
+            Let's Dive In - Let's Dive In - Let's Dive in
+          </span>
+          <span ref={sText1} className="ticktext">
+            {" "}
+            - Let's Dive In - Let's Dive In - Let's Dive In - Let's Dive In -
+            Let's Dive In - Let's Dive In - Let's Dive in
+          </span>
+        </div>
       </div>
     </div>
   );
 }
 
 function AboutMe() {
- return(
-  <div className="h-screen">
-          <div>Ticker</div>
-          About me
-        </div>
- );
+  return (
+    <div className="h-screen flex border">
+      <div className="flex flex-col border"><div className="border text-4xl font-bold p-50 w-screen-1/2 h-[200]"> <div> About me </div><div className="border text-3xl h-[600] w-[600] p-15"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</div></div></div> 
+      </div>
+  );
 }

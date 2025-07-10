@@ -26,7 +26,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="">
-        <div className=" top-0 right-0 fixed absolute flex flex-col py-10 px-5 z-10">
+        <div className=" top-0 right-0 fixed  flex flex-col py-10 px-5 z-10">
           <Link className="text-xl" href="/">
             About
           </Link>
