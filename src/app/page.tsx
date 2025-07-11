@@ -8,19 +8,26 @@ import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SplitText } from "gsap/all";
 
-import { HoverCard, HoverCardContent, HoverCardTrigger } from "@radix-ui/react-hover-card";
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  HoverCard,
+  HoverCardContent,
+  HoverCardTrigger,
+} from "@radix-ui/react-hover-card";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { Link, Mail } from "lucide-react";
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
-
 export default function Home() {
-  
   useEffect(() => {
     SmoothScroll();
   }, []);
- 
-
 
   return (
     <div id="smooth-wrapper">
@@ -28,6 +35,7 @@ export default function Home() {
         <HeroSection />
         <HorizontalWrapper />
         <ExperienceTitle />
+        <Footer />
       </div>
     </div>
   );
@@ -292,7 +300,6 @@ function AboutMe() {
       scrollTrigger: {
         trigger: ".aboutHeader",
         start: "top 90%",
-        markers: true,
       },
     });
     //option 1 fade up paragraph
@@ -304,7 +311,6 @@ function AboutMe() {
       scrollTrigger: {
         trigger: ".para",
         start: "top 60%",
-        markers: true,
       },
     });
     //option 2 reveal paragraph
@@ -357,118 +363,172 @@ function AboutMe() {
 function Languages() {
   return (
     <div>
-      <div className="flex gap-10 border">
-        <Image src="/typescript.png" alt="" height={100} width={100} />
-        <Image src="/tailwindcsslogo.svg" alt="" height={100} width={100} />
-        {/* <Image src="/reactlogo.png" alt="" width={100} height={200} /> */}
-        <Image src="/nextjslogo.png" alt="" width={100} height={100} />
-        <Image src="/java.png" alt="" width={100} height={100} />
-        <Image src="/html-5.png" alt="" width={100} height={100} />
-        <Image src="/gsaplogo.png" alt="" width={100} height={100} />
-        <Image src="/c-sharp.png" alt="" width={100} height={100} />
+      {/* <div className="grid grid-cols-2 gap-20 border overflow-auto h-1/2">
+        <div>
+          <Image src="/typescript.png" alt="" height={100} width={100} />
+          <Image src="/tailwindcsslogo.svg" alt="" height={100} width={100} />
+          <Image src="/prisma.png" alt="" width={100} height={100} />
+          <Image src="/nextjslogo.png" alt="" width={100} height={100} />
+        </div>
+        <div className="pt-10 grid grid-cols-1 gap-20 overflow-y-hidden border">
+          <Image src="/java.png" alt="" width={100} height={100} />
+          <Image src="/html-5.png" alt="" width={100} height={100} />
+          <Image src="/gsaplogo.png" alt="" width={100} height={100} />
+          <Image src="/c-sharp.png" alt="" width={100} height={100} />
+        </div>
+      </div> */}
+       <div className="grid grid-cols-2 gap-20 border overflow-auto h-1/2">
+          <Image className='plane1' src="/typescript.png" alt="" height={100} width={100} />
+          <Image className='plane1'src="/tailwindcsslogo.svg" alt="" height={100} width={100} />
+          <Image className='plane1'src="/prisma.png" alt="" width={100} height={100} />
+          <Image className='plane2'src="/nextjslogo.png" alt="" width={100} height={100} />
+          <Image className='plane2'src="/java.png" alt="" width={100} height={100} />
+          <Image className='plane2'src="/html-5.png" alt="" width={100} height={100} />
+          <Image className='plane3'src="/gsaplogo.png" alt="" width={100} height={100} />
+          <Image className='plane'src="/c-sharp.png" alt="" width={100} height={100} />
       </div>
     </div>
   );
 }
 
-function HorizontalWrapper () {
- useGSAP(() => {
-    const hWrapper = document.querySelector('.hWrapper');
+function HorizontalWrapper() {
+  useGSAP(() => {
+    const hWrapper = document.querySelector(".hWrapper");
 
-    const scrollAmount = (() => {
-      if(hWrapper != null){
-      const hWidth = hWrapper.scrollWidth;
-      return -(hWidth - window.innerWidth);}
-      else {
+    const scrollAmount = () => {
+      if (hWrapper != null) {
+        const hWidth = hWrapper.scrollWidth;
+        return -(hWidth - window.innerWidth);
+      } else {
         return 1;
       }
-    });
+    };
 
     const tween = gsap.to(hWrapper, {
-      x:scrollAmount, 
-      duration: 3, 
-      ease: 'none',
-    })
+      x: scrollAmount,
+      duration: 3,
+      ease: "none",
+    });
     ScrollTrigger.create({
-      trigger: '.hWrapper', 
-      start: 'top top', 
-      end: () => `+=${scrollAmount() * -1}`, 
-      pin: true, 
-      animation: tween, 
-      scrub : 1, 
-      invalidateOnRefresh: true, 
-      markers: true,
-    })
+      trigger: ".hWrapper",
+      start: "top top",
+      end: () => `+=${scrollAmount() * -1}`,
+      pin: true,
+      animation: tween,
+      scrub: 1,
+      invalidateOnRefresh: true,
+    });
   });
   return (
-  <div className=" border hWrapper flex overflow-hidden w-[200vw] ">
-    <AboutMe />
-    <ExperienceSlider />
-    {/* <Languages /> */}
-  </div>);
+    <div className=" border hWrapper flex overflow-hidden w-[200vw] ">
+      <AboutMe />
+      <ExperienceSlider />
+      {/* <Languages /> */}
+    </div>
+  );
 }
 function ExperienceSlider() {
   return (
     <div className="flex justify-center items-center gap-50 px-50">
-    <Card>
-      <CardContent>
-      <div >
-        <Image
-          className="rounded-xl"
-          src="/PFimg.png"
-          alt="planet finder"
-          height={500}
-          width={500}
-        />
-      
-        
-      </div>
-      </CardContent>
-      <CardFooter className="grid grid-col relative">
-        <CardTitle>
-          Planet Finder
-        </CardTitle>
-        <div className="py-5 pb-20">
-        <p>
-        An interactive game designed to teach pathfinding algorithms.
-           </p>
-       <Button className="bottom-0 right-0 absolute mx-5">
-        Learn more
-       </Button>
-       </div>
-      </CardFooter>
+      <Card>
+        <CardContent>
+          <div>
+            <Image
+              className="rounded-xl"
+              src="/PFimg.png"
+              alt="planet finder"
+              height={500}
+              width={500}
+            />
+          </div>
+        </CardContent>
+        <CardFooter className="grid grid-col relative">
+          <CardTitle>Planet Finder</CardTitle>
+          <div className="py-5 pb-20">
+            <p>An interactive game designed to teach pathfinding algorithms.</p>
+            <Button className="bottom-0 right-0 absolute mx-5">
+              Learn more
+            </Button>
+          </div>
+        </CardFooter>
       </Card>
       <Card>
         <CardContent>
-      <div >
-        {" "}
-        <Image className='rounded-xl'src="/dogerest.png" alt="dogerest" height={600} width={500} />
-      </div>
-      </CardContent>
-      <CardFooter className="grid grid-col relative">
-        <CardTitle>
-          Pinterest Front end Clone
-        </CardTitle>
-        <p className="py-5 pb-20">Pinterest clone for dog images.</p>
-        <Button className="bottom-0 right-0 absolute mx-5">Learn more</Button>
-      </CardFooter>
+          <div>
+            {" "}
+            <Image
+              className="rounded-xl"
+              src="/dogerest.png"
+              alt="dogerest"
+              height={600}
+              width={500}
+            />
+          </div>
+        </CardContent>
+        <CardFooter className="grid grid-col relative">
+          <CardTitle>Pinterest Front end Clone</CardTitle>
+          <p className="py-5 pb-20">Pinterest clone for dog images.</p>
+          <Button className="bottom-0 right-0 absolute mx-5">Learn more</Button>
+        </CardFooter>
       </Card>
     </div>
   );
 }
 
 function ExperienceTitle() {
-  return(<div className="h-dvh p-50 border-red-500 border-2 flex">
-    <div className="grid grid-col w-1/2dvh border ">
-    <h1 className="font-extrabold text-6xl"> My Experience</h1>
-    <p>
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-      eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-      enim ad minim veniam, quis nostrud exercitation ullamco laboris
-      nisi ut aliquip ex.
-    </p>
-</div>
-<Languages />
-  </div>);
+  useGSAP (() => {
+const paraSplit = SplitText.create(".para", {
+      type: "words, lines",
 
+      mask: "lines",
+      linesClass: "paragraph-line",
+    });
+
+     gsap.from(paraSplit.words, {
+      yPercent: 200,
+      ease: "power1.in",
+      duration: 1,
+      stagger: 0.01,
+      scrollTrigger: {
+        trigger: ".para",
+        start: "top 60%",
+      },
+    });
+  });
+  return (
+    <div className="h-dvh border-red-500 border-2 bg-linear-to-t from-[#6F5FCB] flex">
+      <div className="grid grid-col h-dvh w-1/2 border py-50 pl-50">
+        <h1 className="font-extrabold text-6xl"> My Experience</h1>
+        <p className="text-5xl para">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+          aliquip ex.
+        </p>
+        <div>
+          <Button variant={"secondary"}>My CV</Button>
+        </div>
+      </div>
+      <div className="flex items-center border-blue-500">
+        {/* <Languages /> */}
+      </div>
+    </div>
+  );
+}
+
+function Footer() {
+  return (
+    <div className="bg-[#5f379e] p-10">
+      <div className="flex gap-5">
+        <a href="https://github.com/elizabetht25/" className="">
+          <Image src="/ghlogo.png" alt="githublogo" width={40} height={40} />
+        </a>
+        <a href="">
+          <Image src="/lilogo.png" alt="linkedinlogo" width={40} height={40} />
+        </a>
+        <Image src="/maillogo.png" alt="mail" width={40} height={40} />
+      </div>
+      <div></div>
+    </div>
+  );
 }
