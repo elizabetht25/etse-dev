@@ -7,18 +7,27 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SplitText } from "gsap/all";
+
+import { HoverCard, HoverCardContent, HoverCardTrigger } from "@radix-ui/react-hover-card";
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
+
 export default function Home() {
+  
   useEffect(() => {
     SmoothScroll();
   }, []);
+ 
+
 
   return (
     <div id="smooth-wrapper">
       <div id="smooth-content">
         <HeroSection />
-        <AboutMe />
+        <HorizontalWrapper />
+        <ExperienceTitle />
       </div>
     </div>
   );
@@ -183,7 +192,7 @@ function HeroSection() {
     <div
       ref={containerRef}
       id="smooth-content"
-      className="py-100 relative flex h-screen overflow-hidden bg-[#8539bf] bg-linear-to-t from-[#C95FCB]"
+      className="py-100 relative flex h-dvh overflow-hidden bg-[#8539bf] bg-linear-to-t from-[#C95FCB]"
     >
       <Image
         className="absolute top-0 right-0 mx-120 p-10 my-5 stagger-bg"
@@ -324,14 +333,14 @@ function AboutMe() {
     // });
   });
   return (
-    <div className="h-screen flex border ">
-      <div className="flex flex-col border">
-        <div className="border p-50 w-screen-1/2 h-[200]">
+    <div className="h-screen flex  ">
+      <div className="flex flex-col ">
+        <div className=" p-50 w-screen h-[200]">
           {" "}
           <div className="aboutHeader flex justify-center overflow-hidden text-6xl font-bold">
             <p>About me</p>
           </div>
-          <div className="border para items-center text-7xl h-[600] p-15 pt-20 overflow-hidden">
+          <div className=" para items-center text-7xl h-[600] p-15 pt-20 overflow-hidden">
             <p>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
               eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
@@ -344,4 +353,122 @@ function AboutMe() {
     </div>
   );
 }
-function ExperienceSlider() {}
+
+function Languages() {
+  return (
+    <div>
+      <div className="flex gap-10 border">
+        <Image src="/typescript.png" alt="" height={100} width={100} />
+        <Image src="/tailwindcsslogo.svg" alt="" height={100} width={100} />
+        {/* <Image src="/reactlogo.png" alt="" width={100} height={200} /> */}
+        <Image src="/nextjslogo.png" alt="" width={100} height={100} />
+        <Image src="/java.png" alt="" width={100} height={100} />
+        <Image src="/html-5.png" alt="" width={100} height={100} />
+        <Image src="/gsaplogo.png" alt="" width={100} height={100} />
+        <Image src="/c-sharp.png" alt="" width={100} height={100} />
+      </div>
+    </div>
+  );
+}
+
+function HorizontalWrapper () {
+ useGSAP(() => {
+    const hWrapper = document.querySelector('.hWrapper');
+
+    const scrollAmount = (() => {
+      if(hWrapper != null){
+      const hWidth = hWrapper.scrollWidth;
+      return -(hWidth - window.innerWidth);}
+      else {
+        return 1;
+      }
+    });
+
+    const tween = gsap.to(hWrapper, {
+      x:scrollAmount, 
+      duration: 3, 
+      ease: 'none',
+    })
+    ScrollTrigger.create({
+      trigger: '.hWrapper', 
+      start: 'top top', 
+      end: () => `+=${scrollAmount() * -1}`, 
+      pin: true, 
+      animation: tween, 
+      scrub : 1, 
+      invalidateOnRefresh: true, 
+      markers: true,
+    })
+  });
+  return (
+  <div className=" border hWrapper flex overflow-hidden w-[200vw] ">
+    <AboutMe />
+    <ExperienceSlider />
+    {/* <Languages /> */}
+  </div>);
+}
+function ExperienceSlider() {
+  return (
+    <div className="flex justify-center items-center gap-50 px-50">
+    <Card>
+      <CardContent>
+      <div >
+        <Image
+          className="rounded-xl"
+          src="/PFimg.png"
+          alt="planet finder"
+          height={500}
+          width={500}
+        />
+      
+        
+      </div>
+      </CardContent>
+      <CardFooter className="grid grid-col relative">
+        <CardTitle>
+          Planet Finder
+        </CardTitle>
+        <div className="py-5 pb-20">
+        <p>
+        An interactive game designed to teach pathfinding algorithms.
+           </p>
+       <Button className="bottom-0 right-0 absolute mx-5">
+        Learn more
+       </Button>
+       </div>
+      </CardFooter>
+      </Card>
+      <Card>
+        <CardContent>
+      <div >
+        {" "}
+        <Image className='rounded-xl'src="/dogerest.png" alt="dogerest" height={600} width={500} />
+      </div>
+      </CardContent>
+      <CardFooter className="grid grid-col relative">
+        <CardTitle>
+          Pinterest Front end Clone
+        </CardTitle>
+        <p className="py-5 pb-20">Pinterest clone for dog images.</p>
+        <Button className="bottom-0 right-0 absolute mx-5">Learn more</Button>
+      </CardFooter>
+      </Card>
+    </div>
+  );
+}
+
+function ExperienceTitle() {
+  return(<div className="h-dvh p-50 border-red-500 border-2 flex">
+    <div className="grid grid-col w-1/2dvh border ">
+    <h1 className="font-extrabold text-6xl"> My Experience</h1>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+      eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+      enim ad minim veniam, quis nostrud exercitation ullamco laboris
+      nisi ut aliquip ex.
+    </p>
+</div>
+<Languages />
+  </div>);
+
+}
