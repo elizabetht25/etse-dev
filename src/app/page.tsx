@@ -360,36 +360,34 @@ function AboutMe() {
   );
 }
 
-function Languages() {
-  return (
-    <div>
-      {/* <div className="grid grid-cols-2 gap-20 border overflow-auto h-1/2">
-        <div>
-          <Image src="/typescript.png" alt="" height={100} width={100} />
-          <Image src="/tailwindcsslogo.svg" alt="" height={100} width={100} />
-          <Image src="/prisma.png" alt="" width={100} height={100} />
-          <Image src="/nextjslogo.png" alt="" width={100} height={100} />
-        </div>
-        <div className="pt-10 grid grid-cols-1 gap-20 overflow-y-hidden border">
-          <Image src="/java.png" alt="" width={100} height={100} />
-          <Image src="/html-5.png" alt="" width={100} height={100} />
-          <Image src="/gsaplogo.png" alt="" width={100} height={100} />
-          <Image src="/c-sharp.png" alt="" width={100} height={100} />
-        </div>
-      </div> */}
-       <div className="grid grid-cols-2 gap-20 border overflow-auto h-1/2">
-          <Image className='plane1' src="/typescript.png" alt="" height={100} width={100} />
-          <Image className='plane1'src="/tailwindcsslogo.svg" alt="" height={100} width={100} />
-          <Image className='plane1'src="/prisma.png" alt="" width={100} height={100} />
-          <Image className='plane2'src="/nextjslogo.png" alt="" width={100} height={100} />
-          <Image className='plane2'src="/java.png" alt="" width={100} height={100} />
-          <Image className='plane2'src="/html-5.png" alt="" width={100} height={100} />
-          <Image className='plane3'src="/gsaplogo.png" alt="" width={100} height={100} />
-          <Image className='plane'src="/c-sharp.png" alt="" width={100} height={100} />
-      </div>
-    </div>
-  );
-}
+// function Languages() {
+//   useGSAP(() => {
+
+//    gsap.to(
+//     '.logos', {
+//       y:400
+//     }
+//    ) 
+//   });
+
+//   });
+//   return (
+//     <div>
+//       <div className="gap-20 border overflow-auto h-[500] p-20">
+//         <div className="grid grid-cols-4 gap-20 logos">
+//           <Image src="/typescript.png" alt="" height={100} width={100} />
+//           <Image src="/tailwindcsslogo.svg" alt="" height={100} width={100} />
+//           <Image src="/prisma.png" alt="" width={100} height={100} />
+//           <Image src="/nextjslogo.png" alt="" width={100} height={100} />
+//           <Image src="/java.png" alt="" width={100} height={100} />
+//           <Image src="/html-5.png" alt="" width={100} height={100} />
+//           <Image src="/gsaplogo.png" alt="" width={100} height={100} />
+//           <Image src="/c-sharp.png" alt="" width={100} height={100} />
+//         </div>
+//       </div>
+//     </div>
+//   );
+// }
 
 function HorizontalWrapper() {
   useGSAP(() => {
@@ -420,7 +418,7 @@ function HorizontalWrapper() {
     });
   });
   return (
-    <div className=" border hWrapper flex overflow-hidden w-[200vw] ">
+    <div className=" hWrapper flex overflow-hidden w-[200vw] ">
       <AboutMe />
       <ExperienceSlider />
       {/* <Languages /> */}
@@ -477,11 +475,23 @@ function ExperienceSlider() {
 
 function ExperienceTitle() {
   useGSAP (() => {
-const paraSplit = SplitText.create(".para", {
+    
+const paraSplit = SplitText.create(".para2", {
       type: "words, lines",
 
       mask: "lines",
       linesClass: "paragraph-line",
+    });
+     gsap.from('.button', {
+      y: 400, 
+ease: 'power2.in', 
+duration:1, 
+scrollTrigger: {
+  trigger: '.logos', 
+  start: '50% 50%', 
+
+  // markers: true, 
+}
     });
 
      gsap.from(paraSplit.words, {
@@ -490,27 +500,64 @@ const paraSplit = SplitText.create(".para", {
       duration: 1,
       stagger: 0.01,
       scrollTrigger: {
-        trigger: ".para",
-        start: "top 60%",
+        trigger: ".logos", 
+        start: "top 80%",
+        end: 'top 30%',
+        // pin: true, 
+        // markers: true,
       },
+      
     });
+   
+    gsap.from('.exp', {
+      ease: 'power1.inOut',
+      scrollTrigger: {
+        trigger:'.exp',
+        pin: true, 
+        start: '50% 60%', 
+        end: '50% 10%', 
+        // markers: true,
+      }
+    })
+    const tl = gsap.timeline();
+    tl.to('.logos',{
+y:-400,
+ease: 'power1.inOut',
+ScrollTrigger: {
+  trigger: '.para2', 
+  // pin:true,
+  scub:true, 
+
+}
+    })
   });
   return (
-    <div className="h-dvh border-red-500 border-2 bg-linear-to-t from-[#6F5FCB] flex">
-      <div className="grid grid-col h-dvh w-1/2 border py-50 pl-50">
+    <div className=" h-350  bg-linear-to-t from-[#6F5FCB] flex">
+      <div className="grid grid-col w-1/2 py-50 pl-50 h-dvh exp">
         <h1 className="font-extrabold text-6xl"> My Experience</h1>
-        <p className="text-5xl para">
+        <p className="text-5xl para2">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
           minim veniam, quis nostrud exercitation ullamco laboris nisi ut
           aliquip ex.
         </p>
         <div>
-          <Button variant={"secondary"}>My CV</Button>
+          <Button className="button" variant={"secondary"}>My CV</Button>
         </div>
       </div>
-      <div className="flex items-center border-blue-500">
-        {/* <Languages /> */}
+      <div className="flex items-center ">
+        <div className=" overflow-auto h-[800] p-20">
+        <div className="grid grid-cols-4 gap-20 logos ">
+          <Image src="/typescript.png" alt="" height={100} width={100} />
+          <Image src="/tailwindcsslogo.svg" alt="" height={100} width={100} />
+          <Image src="/prisma.png" alt="" width={100} height={100} />
+          <Image src="/nextjslogo.png" alt="" width={100} height={100} />
+          <Image src="/java.png" alt="" width={100} height={100} />
+          <Image src="/html-5.png" alt="" width={100} height={100} />
+          <Image src="/gsaplogo.png" alt="" width={100} height={100} />
+          <Image src="/c-sharp.png" alt="" width={100} height={100} />
+        </div>
+      </div>
       </div>
     </div>
   );
