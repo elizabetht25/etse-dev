@@ -233,7 +233,6 @@ function HeroSection() {
           width={2000}
           height={200}
         />
-        
       </div>
       <div></div>
 
@@ -249,13 +248,15 @@ function HeroSection() {
         <h1 className="font-sans"> Elizabeth Tse</h1>
       </div>
 
-      <div className="ticker-wrap-1 absolute bottom-0 py-1 w-full overflow-hidden
+      <div
+        className="ticker-wrap-1 absolute bottom-0 py-1 w-full overflow-hidden
       xl:py-15
       lg:py-10
       md:py-5
       sm:py-3
       
-      ">
+      "
+      >
         <div
           ref={text1slider}
           className="text-2xl font-extrabold flex whitespace-nowrap
@@ -341,24 +342,42 @@ function AboutMe() {
   });
   return (
     <div className="h-screen flex flex-col ">
-        <div className="  w-screen h-[200]
-        lg:p-50
-        md:p-30
-        sm:p-15
-        p-10
-        ">
-          {" "}
-          <div className="aboutHeader flex justify-center overflow-hidden text-6xl font-bold">
-            <p>About me</p>
-          </div>
-          <div className=" para items-center text-7xl h-[600] p-15 pt-20 overflow-hidden">
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex.
-            </p>
-          </div>
+      <div
+        className="  w-screen h-[200]
+        xl:p-50
+        lg:p-30
+        md:p-15
+        sm:p-10
+        "
+      >
+        {" "}
+        <div
+          className="aboutHeader flex justify-center overflow-hidden font-bold
+          xl:text-6xl
+          lg:text-5xl
+          md:text-5x
+          sm:text-3xl
+          text-2xl
+          "
+        >
+          <p>About me</p>
+        </div>
+        <div
+          className=" para h-[600] overflow-hidden text-clip border
+          xl:text-7xl xl:p-15 xl:pt-20
+          lg:text-6xl lg:p-13 lg:pt-15
+          md:text-4xl md:p-10 md:pt-10
+          sm:text-4xl sm:p-8 sm:pt-5
+          text-3xl p-5 pt-3
+          "
+        >
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip ex.
+          </p>
+        </div>
       </div>
     </div>
   );
