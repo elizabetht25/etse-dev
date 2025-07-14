@@ -500,17 +500,32 @@ function ExperienceTitle() {
   useGSAP(() => {
     const paraSplit = SplitText.create(".para2", {
       type: "words, lines",
-
       mask: "lines",
       linesClass: "paragraph-line",
     });
+
+    const logos = document.querySelectorAll("[data-speed]");
+    logos.forEach((e) => {
+      const speed = parseFloat(e.getAttribute("data-speed") ?? "1");
+
+      gsap.to(e, {
+        y: () => -(window.innerHeight * speed), 
+        ease:'expo.out', 
+        scrollTrigger: {
+          trigger: '.exp', 
+          start: "50% 50%", 
+          scrub: true,
+          markers: true,
+        }
+      })
+    })
     gsap.from(".button", {
       y: 400,
       ease: "power2.in",
       duration: 1,
       scrollTrigger: {
         trigger: ".logos",
-        start: "50% 50%",
+        start: "50% 60%",
 
         // markers: true,
       },
@@ -540,16 +555,7 @@ function ExperienceTitle() {
         // markers: true,
       },
     });
-    const tl = gsap.timeline();
-    tl.to(".logos", {
-      y: -400,
-      ease: "power1.inOut",
-      ScrollTrigger: {
-        trigger: ".para2",
-        // pin:true,
-        scub: true,
-      },
-    });
+    gsap.to
   });
   return (
     <div className=" h-350  bg-linear-to-t from-[#6F5FCB] flex">
@@ -567,19 +573,26 @@ function ExperienceTitle() {
           </Button>
         </div>
       </div>
-      <div className="flex items-center ">
-        <div className=" overflow-auto h-[800] p-20">
-          <div className="grid grid-cols-4 gap-20 logos ">
+      <div className="relative w-1/2 flex justify-center">
+        {/* <div className=" h-[800] p-20 border"> */}
+          <div className="grid grid-cols-3 gap-20 logos absolute bottom-0 top-0 pt-50">
+<div className="grid gap-30" data-speed='clamp(1.5)'>
             <Image src="/typescript.png" alt="" height={100} width={100} />
             <Image src="/tailwindcsslogo.svg" alt="" height={100} width={100} />
-            <Image src="/prisma.png" alt="" width={100} height={100} />
+          <Image src="/prisma.png" alt="" width={100} height={100} />
+</div>
+<div className="grid gap-30" data-speed="clamp(2)">
             <Image src="/nextjslogo.png" alt="" width={100} height={100} />
             <Image src="/java.png" alt="" width={100} height={100} />
             <Image src="/html-5.png" alt="" width={100} height={100} />
+</div>
+<div className="grid gap-30" data-speed='clamp(1.8)'>
             <Image src="/gsaplogo.png" alt="" width={100} height={100} />
-            <Image src="/c-sharp.png" alt="" width={100} height={100} />
+            <Image src="/pythlogo.png" alt="" width={100} height={100} />
+            <Image src="/js.png" alt="" width={100} height={100} />
+            </div>
           </div>
-        </div>
+        {/* </div> */}
       </div>
     </div>
   );
