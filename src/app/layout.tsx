@@ -16,6 +16,10 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "etse-dev",
   description: "Portfolio of Elizabeth Tse",
+  viewport: "width=device-width, initial-scale=1", 
+  robots: "index, follow",
+  authors: [{name: "Elizabeth"}],
+  keywords: ["portfolio", "developer", "web development"]
 };
 
 export default function RootLayout({
@@ -25,8 +29,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="">
-        <div className=" top-0 right-0 fixed  flex flex-col py-10 px-5 z-10">
+      <body className="font-sans">
+        <div className=" top-0 right-0 fixed  flex flex-col py-10 px-5 z-30">
           <Link className="text-xl" href="/">
             About
           </Link>

@@ -199,27 +199,29 @@ function HeroSection() {
   return (
     <div
       ref={containerRef}
-      id="smooth-content"
-      className="py-100 relative flex h-dvh overflow-hidden bg-[#8539bf] bg-linear-to-t from-[#C95FCB]"
+      // id="smooth-content"
+      className=" relative flex align-middle h-dvh pt-10 border w-dvw overflow-hidden bg-[#8539bf] bg-linear-to-t from-[#C95FCB]"
     >
-      <Image
-        className="absolute top-0 right-0 mx-120 p-10 my-5 stagger-bg"
-        src={"/sun.svg"}
-        alt="sun"
-        width={400}
-        height={200}
-      />
+      <div className=" border stagger-bg top-0 right-0 absolute w-3/5">
+        <Image
+          className="top-0 right-0 my-5 align-middle"
+          src={"/sun.svg"}
+          alt="sun"
+          width={400}
+          height={200}
+        />
+      </div>
       <div className="">
         <Image
-          className="absolute bottom-0 pb-35 stagger-bg"
+          className="absolute bottom-0 stagger-bg"
           src={"/mgbuildings.svg"}
           alt="middleground buildings"
           width={2000}
           height={500}
         />
         <Image
-          className="absolute bottom-0 pb-35 stagger-bg"
-          src={"/fgbuildings.svg"}
+          className="absolute bottom-0 stagger-bg"
+          src={"/fgbuildings1.svg"}
           alt="foreground buildings"
           width={2000}
           height={500}
@@ -231,37 +233,34 @@ function HeroSection() {
           width={2000}
           height={200}
         />
+        
       </div>
+      <div></div>
 
       <div
         ref={textRef}
-        className="text-7xl px-30 flex flex-col absolute text-opacity-0"
+        className="w-dvw flex flex-col border justify-center z-10
+        text-2xl px-5
+        lg:text-7xl lg:px-15
+        md:text-4xl md:px-10
+        "
       >
-        <h1 className="font-sans-[Oxanium]">Hi, I am </h1>
-        <h1> Elizabeth Tse</h1>
+        <h1 className="font-serif">Hi, I am </h1>
+        <h1 className="font-sans"> Elizabeth Tse</h1>
       </div>
 
-      {/* <div className="ticker-wrap-1 absolute border bottom-0 py-5 w-full overflow-hidden">
-        <div
-          ref={text2slider}
-          className="text-4xl font-extrabold flex whitespace-nowrap"
-        >
-          <span ref={fText2}>
-            {" "}
-            - Let's Dive In - Let's Dive In - Let's Dive In - Let's Dive In -
-            Let's Dive In - Let's Dive In - Let's Dive in
-          </span>
-          <span ref={sText2} className="ticktext">
-            {" "}
-            - Let's Dive In - Let's Dive In - Let's Dive In - Let's Dive In -
-            Let's Dive In - Let's Dive In - Let's Dive in
-          </span>
-        </div>
-      </div> */}
-      <div className="ticker-wrap-1 absolute bottom-0 py-15 w-full overflow-hidden">
+      <div className="ticker-wrap-1 absolute bottom-0 py-1 w-full overflow-hidden
+      lg:py-15
+      md:py-10
+      sm:py-5
+      ">
         <div
           ref={text1slider}
-          className="text-5xl font-extrabold flex whitespace-nowrap"
+          className="text-2xl font-extrabold flex whitespace-nowrap
+          lg:text-5xl
+          md:text-4xl
+          sm:text-3xl
+          "
         >
           <span ref={fText1}>
             {" "}
@@ -339,9 +338,13 @@ function AboutMe() {
     // });
   });
   return (
-    <div className="h-screen flex  ">
-      <div className="flex flex-col ">
-        <div className=" p-50 w-screen h-[200]">
+    <div className="h-screen flex flex-col ">
+        <div className="  w-screen h-[200]
+        lg:p-50
+        md:p-30
+        sm:p-15
+        p-10
+        ">
           {" "}
           <div className="aboutHeader flex justify-center overflow-hidden text-6xl font-bold">
             <p>About me</p>
@@ -354,7 +357,6 @@ function AboutMe() {
               nisi ut aliquip ex.
             </p>
           </div>
-        </div>
       </div>
     </div>
   );
@@ -367,7 +369,7 @@ function AboutMe() {
 //     '.logos', {
 //       y:400
 //     }
-//    ) 
+//    )
 //   });
 
 //   });
@@ -474,62 +476,59 @@ function ExperienceSlider() {
 }
 
 function ExperienceTitle() {
-  useGSAP (() => {
-    
-const paraSplit = SplitText.create(".para2", {
+  useGSAP(() => {
+    const paraSplit = SplitText.create(".para2", {
       type: "words, lines",
 
       mask: "lines",
       linesClass: "paragraph-line",
     });
-     gsap.from('.button', {
-      y: 400, 
-ease: 'power2.in', 
-duration:1, 
-scrollTrigger: {
-  trigger: '.logos', 
-  start: '50% 50%', 
+    gsap.from(".button", {
+      y: 400,
+      ease: "power2.in",
+      duration: 1,
+      scrollTrigger: {
+        trigger: ".logos",
+        start: "50% 50%",
 
-  // markers: true, 
-}
+        // markers: true,
+      },
     });
 
-     gsap.from(paraSplit.words, {
+    gsap.from(paraSplit.words, {
       yPercent: 200,
       ease: "power1.in",
       duration: 1,
       stagger: 0.01,
       scrollTrigger: {
-        trigger: ".logos", 
+        trigger: ".logos",
         start: "top 80%",
-        end: 'top 30%',
-        // pin: true, 
+        end: "top 30%",
+        // pin: true,
         // markers: true,
       },
-      
     });
-   
-    gsap.from('.exp', {
-      ease: 'power1.inOut',
-      scrollTrigger: {
-        trigger:'.exp',
-        pin: true, 
-        start: '50% 60%', 
-        end: '50% 10%', 
-        // markers: true,
-      }
-    })
-    const tl = gsap.timeline();
-    tl.to('.logos',{
-y:-400,
-ease: 'power1.inOut',
-ScrollTrigger: {
-  trigger: '.para2', 
-  // pin:true,
-  scub:true, 
 
-}
-    })
+    gsap.from(".exp", {
+      ease: "power1.inOut",
+      scrollTrigger: {
+        trigger: ".exp",
+        pin: true,
+        start: "50% 60%",
+        end: "50% 10%",
+        // markers: true,
+      },
+    });
+    const tl = gsap.timeline();
+    tl.to(".logos", {
+      y: -400,
+      ease: "power1.inOut",
+      ScrollTrigger: {
+        trigger: ".para2",
+        // pin:true,
+        scub: true,
+      },
+    });
   });
   return (
     <div className=" h-350  bg-linear-to-t from-[#6F5FCB] flex">
@@ -542,22 +541,24 @@ ScrollTrigger: {
           aliquip ex.
         </p>
         <div>
-          <Button className="button" variant={"secondary"}>My CV</Button>
+          <Button className="button" variant={"secondary"}>
+            My CV
+          </Button>
         </div>
       </div>
       <div className="flex items-center ">
         <div className=" overflow-auto h-[800] p-20">
-        <div className="grid grid-cols-4 gap-20 logos ">
-          <Image src="/typescript.png" alt="" height={100} width={100} />
-          <Image src="/tailwindcsslogo.svg" alt="" height={100} width={100} />
-          <Image src="/prisma.png" alt="" width={100} height={100} />
-          <Image src="/nextjslogo.png" alt="" width={100} height={100} />
-          <Image src="/java.png" alt="" width={100} height={100} />
-          <Image src="/html-5.png" alt="" width={100} height={100} />
-          <Image src="/gsaplogo.png" alt="" width={100} height={100} />
-          <Image src="/c-sharp.png" alt="" width={100} height={100} />
+          <div className="grid grid-cols-4 gap-20 logos ">
+            <Image src="/typescript.png" alt="" height={100} width={100} />
+            <Image src="/tailwindcsslogo.svg" alt="" height={100} width={100} />
+            <Image src="/prisma.png" alt="" width={100} height={100} />
+            <Image src="/nextjslogo.png" alt="" width={100} height={100} />
+            <Image src="/java.png" alt="" width={100} height={100} />
+            <Image src="/html-5.png" alt="" width={100} height={100} />
+            <Image src="/gsaplogo.png" alt="" width={100} height={100} />
+            <Image src="/c-sharp.png" alt="" width={100} height={100} />
+          </div>
         </div>
-      </div>
       </div>
     </div>
   );
