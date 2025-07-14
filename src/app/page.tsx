@@ -200,9 +200,9 @@ function HeroSection() {
     <div
       ref={containerRef}
       // id="smooth-content"
-      className=" relative flex align-middle h-dvh pt-10 border w-dvw overflow-hidden bg-[#8539bf] bg-linear-to-t from-[#C95FCB]"
+      className=" relative flex align-middle h-dvh pt-10  w-dvw overflow-hidden bg-[#8539bf] bg-linear-to-t from-[#C95FCB]"
     >
-      <div className=" border stagger-bg top-0 right-0 absolute w-3/5">
+      <div className="  stagger-bg top-0 right-0 absolute w-3/5">
         <Image
           className="top-0 right-0 my-5 align-middle"
           src={"/sun.svg"}
