@@ -239,7 +239,7 @@ function HeroSection() {
 
       <div
         ref={textRef}
-        className="w-dvw flex flex-col border justify-center z-10
+        className="w-dvw flex flex-col justify-center z-10
         text-2xl px-5
         lg:text-7xl lg:px-15
         md:text-4xl md:px-10
@@ -250,9 +250,11 @@ function HeroSection() {
       </div>
 
       <div className="ticker-wrap-1 absolute bottom-0 py-1 w-full overflow-hidden
-      lg:py-15
-      md:py-10
-      sm:py-5
+      xl:py-15
+      lg:py-10
+      md:py-5
+      sm:py-3
+      
       ">
         <div
           ref={text1slider}
