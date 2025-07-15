@@ -363,7 +363,7 @@ function AboutMe() {
           <p>About me</p>
         </div>
         <div
-          className=" para h-[600] overflow-hidden text-clip border
+          className=" para h-[600] overflow-hidden text-clip text-center
           xl:text-7xl xl:p-15 xl:pt-20
           lg:text-6xl lg:p-13 lg:pt-15
           md:text-4xl md:p-10 md:pt-10
@@ -372,10 +372,10 @@ function AboutMe() {
           "
         >
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex.
+            I am a junior software engineer studying at the University of
+            Birmingham with an interest in exploring different technologies and
+            concepts. By deepening my understanding I aim to expand my skill set
+            and identify my passion.
           </p>
         </div>
       </div>
@@ -509,16 +509,15 @@ function ExperienceTitle() {
       const speed = parseFloat(e.getAttribute("data-speed") ?? "1");
 
       gsap.to(e, {
-        y: () => -(window.innerHeight * speed), 
-        ease:'expo.out', 
+        y: () => -(window.innerHeight * speed),
+        ease: "expo.out",
         scrollTrigger: {
-          trigger: '.exp', 
-          start: "50% 50%", 
+          trigger: ".exp",
+          start: "50% 50%",
           scrub: true,
-          markers: true,
-        }
-      })
-    })
+        },
+      });
+    });
     gsap.from(".button", {
       y: 400,
       ease: "power2.in",
@@ -555,13 +554,21 @@ function ExperienceTitle() {
         // markers: true,
       },
     });
-    gsap.to
+    gsap.to;
   });
   return (
     <div className=" h-350  bg-linear-to-t from-[#6F5FCB] flex">
       <div className="grid grid-col w-1/2 py-50 pl-50 h-dvh exp">
         <h1 className="font-extrabold text-6xl"> My Experience</h1>
-        <p className="text-5xl para2">
+        <p
+          className=" para2
+         xl:text-5xl 
+          lg:text-4 
+          md:text-3xl 
+          sm:text-2xl 
+          text-xl
+        "
+        >
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
           minim veniam, quis nostrud exercitation ullamco laboris nisi ut
@@ -575,23 +582,23 @@ function ExperienceTitle() {
       </div>
       <div className="relative w-1/2 flex justify-center">
         {/* <div className=" h-[800] p-20 border"> */}
-          <div className="grid grid-cols-3 gap-20 logos absolute bottom-0 top-0 pt-50">
-<div className="grid gap-30" data-speed='clamp(1.5)'>
+        <div className="grid grid-cols-3 gap-20 logos absolute bottom-0 top-0 pt-50">
+          <div className="grid gap-40" data-speed="clamp(1.5)">
             <Image src="/typescript.png" alt="" height={100} width={100} />
             <Image src="/tailwindcsslogo.svg" alt="" height={100} width={100} />
-          <Image src="/prisma.png" alt="" width={100} height={100} />
-</div>
-<div className="grid gap-30" data-speed="clamp(2)">
+            <Image src="/prisma.png" alt="" width={100} height={100} />
+          </div>
+          <div className="grid gap-40" data-speed="clamp(4)">
             <Image src="/nextjslogo.png" alt="" width={100} height={100} />
             <Image src="/java.png" alt="" width={100} height={100} />
             <Image src="/html-5.png" alt="" width={100} height={100} />
-</div>
-<div className="grid gap-30" data-speed='clamp(1.8)'>
+          </div>
+          <div className="grid gap-40" data-speed="clamp(2.8)">
             <Image src="/gsaplogo.png" alt="" width={100} height={100} />
             <Image src="/pythlogo.png" alt="" width={100} height={100} />
             <Image src="/js.png" alt="" width={100} height={100} />
-            </div>
           </div>
+        </div>
         {/* </div> */}
       </div>
     </div>
